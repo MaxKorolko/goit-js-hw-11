@@ -1,3 +1,5 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchPhoto } from './js/fetch-photo';
 import makeGalleryCard from './js/gallery-card-render';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -9,6 +11,8 @@ const refs = {
   loadMore: document.querySelector('.load-more'),
   loadMoreContainer: document.querySelector('.load-more-container'),
 };
+
+const gallery = new SimpleLightbox('.gallery__item');
 
 refs.form.addEventListener('submit', onSearchForm);
 refs.loadMore.addEventListener('click', onSeeMore);
