@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const perPage = 40;
+const perPage = 40;
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 const API_KEY = '28033365-ba4821d388ed22fecf976971a';
@@ -19,4 +19,4 @@ async function fetchPhoto(request, page) {
   return await axios.get(`?&${fetchParams}`);
 }
 
-export { fetchPhoto };
+export { fetchPhoto, perPage };

@@ -1,21 +1,22 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { fetchPhoto } from './js/fetch-photo';
-import makeGalleryCard from './js/gallery-card-render';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { perPage } from './js/fetch-photo';
+import { fetchPhoto, perPage } from './js/fetch-photo';
+import makeGalleryCard from './js/gallery-card-render';
 
 const refs = {
   gallery: document.querySelector('.gallery'),
   form: document.querySelector('.search-form'),
   loadMore: document.querySelector('.load-more'),
   loadMoreContainer: document.querySelector('.load-more-container'),
+  btnScroll: document.querySelector('#btn-scroll'),
 };
-
-const gallery = new SimpleLightbox('.gallery__item');
 
 refs.form.addEventListener('submit', onSearchForm);
 refs.loadMore.addEventListener('click', onSeeMore);
+refs.btnScroll.addEventListener('click', onScrollUpp);
+
+const gallery = new SimpleLightbox('.gallery__item');
 
 let request = '';
 let page = 0;
@@ -46,7 +47,6 @@ function onSearchForm(event) {
 }
 
 function onSeeMore(event) {
-  event.preventDefault();
   page += 1;
 
   fetchPhoto(request, page).then(response => {
@@ -59,3 +59,15 @@ function onSeeMore(event) {
     }
   });
 }
+
+function onScrollUpp() {
+  window.scrollTo(0, 0);
+}
+
+window.onscroll = () => {
+  if (window.scrollY > 700) {
+    refs.btnScroll.classList.add('is-show');
+  } else if (window.scrollY < 700) {
+    refs.btnScroll.classList.remove('is-show');
+  }
+};
