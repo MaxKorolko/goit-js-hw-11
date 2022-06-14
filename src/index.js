@@ -40,6 +40,7 @@ function onSearchForm(event) {
       Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
       refs.gallery.innerHTML = makeGalleryCard(response);
       refs.loadMoreContainer.classList.remove('is-hidden');
+      gallery.refresh();
     }
   });
 }
@@ -54,6 +55,7 @@ function onSeeMore(event) {
       refs.loadMoreContainer.classList.add('is-hidden');
     } else {
       refs.gallery.insertAdjacentHTML('beforeend', makeGalleryCard(response));
+      gallery.refresh();
     }
   });
 }
